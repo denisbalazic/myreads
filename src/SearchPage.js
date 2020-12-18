@@ -4,6 +4,7 @@ import SearchDisplay from "./SearchDisplay";
 
 class SearchPage extends Component {
   render() {
+    const { books } = this.props;
     return (
       <div className="SearchPage">
         <SearchInput />

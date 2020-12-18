@@ -7,7 +7,11 @@ class SearchDisplay extends Component {
       <div className="search-books-results">
         <ol className="books-grid">
           <li>
-            <Book />
+            {/* {books.map((book) => (
+              <li>
+                <Book key={book.id} book={book} />
+              </li>
+            ))} */}
           </li>
         </ol>
       </div>
