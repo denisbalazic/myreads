@@ -3,12 +3,8 @@ import { Link } from "react-router-dom";
 import Shelf from "./Shelf";
 
 class ShelvesPage extends Component {
-  filterShelfBooks = (shelf) => {
-    this.props.books.filter((book) => book.shelf === shelf);
-  };
-
   render() {
-    const { books } = this.props;
+    const { books, onUpdateBook } = this.props;
     const shelves = ["currentlyReading", "wantToRead", "read"];
     return (
       <div className="list-books">
@@ -17,7 +13,12 @@ class ShelvesPage extends Component {
         </div>
         <div className="list-books-content">
           {shelves.map((shelf, index) => (
-            <Shelf key={index} books={books.filter((book) => book.shelf === shelf)} />
+            <Shelf
+              key={shelf}
+              books={books.filter((book) => book.shelf === shelf)}
+              title={shelf}
+              onUpdateBook={onUpdateBook}
+            />
           ))}
         </div>
         <div className="open-search">

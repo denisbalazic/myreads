@@ -3,16 +3,16 @@ import Book from "./Book";
 
 class Shelf extends Component {
   render() {
-    const { books } = this.props;
-    console.log("from shelf: ", books);
+    const { books, title, onUpdateBook } = this.props;
+
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">Currently Reading</h2>
+        <h2 className="bookshelf-title">{title}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {books.map((book) => (
+            {books.map((book, index) => (
               <li>
-                <Book key={book.id} book={book} />
+                <Book key={book.id} book={book} onUpdateBook={onUpdateBook} />
               </li>
             ))}
           </ol>
