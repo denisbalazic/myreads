@@ -17,11 +17,11 @@ class SearchPage extends Component {
   };
   render() {
     const { query, foundBooks } = this.state;
-    const onUpdateBook = this.props.onUpdateBook;
+    const { shelves, onUpdateBook } = this.props;
     return (
       <div className="SearchPage">
         <SearchInput query={query} onInputChange={this.updateQuery} />
-        <SearchDisplay books={foundBooks} onUpdateBook={onUpdateBook} />
+        <SearchDisplay books={foundBooks} shelves={shelves} onUpdateBook={onUpdateBook} />
       </div>
     );
   }

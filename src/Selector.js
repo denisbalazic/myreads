@@ -8,6 +8,8 @@ class Selector extends Component {
   };
 
   render() {
+    const { book, shelves } = this.props;
+    console.log(shelves);
     return (
       //TODO: Refactor selected options in DRY manner (loop through shelves?)
       <div className="book-shelf-changer">
@@ -15,15 +17,11 @@ class Selector extends Component {
           <option value="move" disabled>
             Move to...
           </option>
-          <option value="currentlyReading" selected={this.props.book.shelf === "currentlyReading" ? true : null}>
-            Currently Reading
-          </option>
-          <option value="wantToRead" selected={this.props.book.shelf === "wantToRead" ? true : null}>
-            Want to Read
-          </option>
-          <option value="read" selected={this.props.book.shelf === "read" ? true : null}>
-            Read
-          </option>
+          {shelves.map((shelf) => (
+            <option value={shelf.name} selected={book.shelf === shelf.name ? true : null}>
+              {shelf.displayName}
+            </option>
+          ))}
           <option value="none" selected={!this.props.book.shelf ? true : null}>
             None
           </option>

@@ -3,8 +3,8 @@ import Selector from "./Selector";
 
 class Book extends Component {
   render() {
-    const { title, authors, id, imageLinks } = this.props.book;
-    const onUpdateBook = this.props.onUpdateBook;
+    const { book, shelves, onUpdateBook } = this.props;
+    const { title, authors, id, imageLinks } = book;
 
     return (
       <div className="book">
@@ -17,7 +17,7 @@ class Book extends Component {
               backgroundImage: `url(${imageLinks.thumbnail})`,
             }}
           />
-          <Selector book={this.props.book} onUpdateBook={onUpdateBook} />
+          <Selector book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
         </div>
         <div className="book-title">{title}</div>
         <div className="book-authors">{authors}</div>

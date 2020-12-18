@@ -6,6 +6,21 @@ import SearchPage from "./SearchPage";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 
+const shelves = [
+  {
+    name: "currentlyReading",
+    displayName: "Currently Reading",
+  },
+  {
+    name: "wantToRead",
+    displayName: "Want To Read",
+  },
+  {
+    name: "read",
+    displayName: "Read",
+  },
+];
+
 class BooksApp extends Component {
   state = {
     books: [{}],
@@ -33,8 +48,15 @@ class BooksApp extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" render={() => <ShelvesPage books={this.state.books} onUpdateBook={this.updateBook} />} />
-        <Route path="/search" render={() => <SearchPage books={this.state.books} onUpdateBook={this.updateBook} />} />
+        <Route
+          exact
+          path="/"
+          render={() => <ShelvesPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />}
+        />
+        <Route
+          path="/search"
+          render={() => <SearchPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />}
+        />
       </div>
     );
   }

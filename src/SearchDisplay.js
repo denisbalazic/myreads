@@ -3,14 +3,14 @@ import Book from "./Book";
 
 class SearchDisplay extends Component {
   render() {
-    const { books, onUpdateBook } = this.props;
+    const { books, shelves, onUpdateBook } = this.props;
     return (
       <div className="search-books-results">
         <ol className="books-grid">
           <li>
             {books.map((book) => (
               <li>
-                <Book key={book.id} book={book} onUpdateBook={onUpdateBook} />
+                <Book key={book.id} book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
               </li>
             ))}
           </li>
