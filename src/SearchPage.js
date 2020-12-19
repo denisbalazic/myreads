@@ -26,12 +26,17 @@ class SearchPage extends Component {
 
   render() {
     const { query, foundBooks, invalidQuery } = this.state;
-    const { shelves, onUpdateBook } = this.props;
+    const { books, shelves, onUpdateBook } = this.props;
     return (
       <div className="SearchPage">
         <SearchInput query={query} onInputChange={this.updateQuery} />
         {foundBooks && foundBooks.length > 0 && (
-          <SearchDisplay books={foundBooks} shelves={shelves} onUpdateBook={onUpdateBook} />
+          <SearchDisplay
+            books={books}
+            foundBooks={foundBooks}
+            shelves={shelves}
+            onUpdateBook={onUpdateBook}
+          />
         )}
         <p>{invalidQuery ? "Invalid query" : null}</p>
       </div>

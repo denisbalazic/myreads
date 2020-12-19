@@ -7,13 +7,17 @@ class Shelf extends Component {
 
     return (
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{title}</h2>
+        <div className="bookshelf-title">
+          <h2>{title}</h2>
+          <button className="btn-small">remove shelf</button>
+        </div>
         <div className="bookshelf-books">
           <ol className="books-grid">
-            {books.length > 0 &&
+            {books &&
+              books.length > 0 &&
               books.map((book) => (
-                <li>
-                  <Book key={book.id} book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
+                <li key={book.id}>
+                  <Book book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
                 </li>
               ))}
           </ol>

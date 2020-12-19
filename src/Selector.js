@@ -12,7 +12,7 @@ class Selector extends Component {
     return (
       //TODO: Refactor selected options in DRY manner (loop through shelves?)
       <div className="book-shelf-changer">
-        <select value={book.shelf || "none"} onChange={(e) => this.updateShelf(e)}>
+        <select value={book.shelf} onChange={(e) => this.updateShelf(e)}>
           <option value="move" disabled>
             Move to...
           </option>

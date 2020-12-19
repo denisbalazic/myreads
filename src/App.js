@@ -6,27 +6,27 @@ import SearchPage from "./SearchPage";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 
-/**
- * Shelves are here so I can easily add some more
- */
-const shelves = [
-  {
-    name: "currentlyReading",
-    displayName: "Currently Reading",
-  },
-  {
-    name: "wantToRead",
-    displayName: "Want To Read",
-  },
-  {
-    name: "read",
-    displayName: "Read",
-  },
-];
-
 class BooksApp extends Component {
   state = {
     books: [],
+    shelves: [
+      {
+        name: "currentlyReading",
+        displayName: "Currently Reading",
+      },
+      {
+        name: "wantToRead",
+        displayName: "Want To Read",
+      },
+      {
+        name: "read",
+        displayName: "Read",
+      },
+      {
+        name: "dfg",
+        displayName: "DFFFG",
+      },
+    ],
   };
 
   async componentDidMount() {
@@ -50,7 +50,16 @@ class BooksApp extends Component {
     BooksAPI.update(book, book.shelf);
   };
 
+  addShelf = (shelfName) => {
+    this.setState((prevState) => ({
+      shelves: prevState.shelves.concat([
+        { name: shelfName.toLowerCase().trim(), displayName: shelfName },
+      ]),
+    }));
+  };
+
   render() {
+    const { books, shelves } = this.state;
     return (
       <div>
         <Route
@@ -58,8 +67,9 @@ class BooksApp extends Component {
           path="/"
           render={() => (
             <ShelvesPage
-              books={this.state.books}
+              books={books}
               shelves={shelves}
+              onAddNewShelf={this.addShelf}
               onUpdateBook={this.updateBook}
             />
           )}
@@ -67,7 +77,7 @@ class BooksApp extends Component {
         <Route
           path="/search"
           render={() => (
-            <SearchPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />
+            <SearchPage books={books} shelves={shelves} onUpdateBook={this.updateBook} />
           )}
         />
       </div>

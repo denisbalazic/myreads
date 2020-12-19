@@ -17,7 +17,8 @@ class Book extends Component {
               backgroundImage: `url(${
                 imageLinks
                   ? imageLinks.thumbnail
-                  : "https://www.doakgolf.com/wp-content/uploads/book-na-1.jpg"
+                  : //TODO: Find nicer image
+                    "https://www.doakgolf.com/wp-content/uploads/book-na-1.jpg"
               })`,
             }}
           />
