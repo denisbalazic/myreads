@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Selector extends Component {
   updateShelf = (e) => {
@@ -27,5 +28,11 @@ class Selector extends Component {
     );
   }
 }
+
+Selector.propTypes = {
+  book: PropTypes.object.isRequired,
+  shelves: PropTypes.array.isRequired,
+  onUpdateBook: PropTypes.func.isRequired,
+};
 
 export default Selector;

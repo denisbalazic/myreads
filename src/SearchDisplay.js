@@ -1,23 +1,35 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Book from "./Book";
 
 class SearchDisplay extends Component {
   render() {
-    const { books, shelves, onUpdateBook } = this.props;
+    const { books, foundBooks, shelves, onUpdateBook } = this.props;
     return (
       <div className="search-books-results">
         <ol className="books-grid">
-          {books &&
-            books.length > 0 &&
-            books.map((book) => (
-              <li>
-                <Book key={book.id} book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
-              </li>
-            ))}
+          {foundBooks &&
+            foundBooks.length > 0 &&
+            foundBooks.map((foundBook) => {
+              const index = books.findIndex((b) => b.id === foundBook.id);
+              index !== -1 ? (foundBook.shelf = books[index].shelf) : (foundBook.shelf = "none");
+              return (
+                <li key={foundBook.id}>
+                  <Book book={foundBook} shelves={shelves} onUpdateBook={onUpdateBook} />
+                </li>
+              );
+            })}
         </ol>
       </div>
     );
   }
 }
+
+SearchDisplay.propTypes = {
+  books: PropTypes.array,
+  foundBooks: PropTypes.array.isRequired,
+  shelves: PropTypes.array.isRequired,
+  onUpdateBook: PropTypes.func.isRequired,
+};
 
 export default SearchDisplay;
