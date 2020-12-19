@@ -14,8 +14,8 @@ class ShelvesPage extends Component {
         <div className="list-books-content">
           {shelves.map((shelf, index) => (
             <Shelf
-              key={shelf}
-              books={books.filter((book) => book.shelf === shelf.name)}
+              key={shelf.name}
+              books={books && books.filter((book) => book.shelf === shelf.name)}
               title={shelf.displayName}
               shelves={shelves}
               onUpdateBook={onUpdateBook}

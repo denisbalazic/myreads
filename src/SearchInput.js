@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import BooksApp from "./App";
 
 class SearchInput extends Component {
   render() {

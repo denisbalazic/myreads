@@ -4,8 +4,7 @@ import Selector from "./Selector";
 class Book extends Component {
   render() {
     const { book, shelves, onUpdateBook } = this.props;
-    const { title, authors, id, imageLinks } = book;
-
+    const { title, authors, imageLinks } = book;
     return (
       <div className="book">
         <div className="book-top">
@@ -14,7 +13,12 @@ class Book extends Component {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${imageLinks.thumbnail})`,
+              // backgroundSize: "cover",
+              backgroundImage: `url(${
+                imageLinks
+                  ? imageLinks.thumbnail
+                  : "https://www.doakgolf.com/wp-content/uploads/book-na-1.jpg"
+              })`,
             }}
           />
           <Selector book={book} shelves={shelves} onUpdateBook={onUpdateBook} />

@@ -7,21 +7,33 @@ class SearchPage extends Component {
   state = {
     query: "",
     foundBooks: [],
+    invalidQuery: false,
   };
+
   updateQuery = (e) => {
     const query = e.target.value;
     this.setState({ query: query });
+    if (query === "") {
+      this.setState({ foundBooks: [] });
+      return;
+    }
     BooksAPI.search(query).then((books) => {
-      this.setState({ foundBooks: books });
+      books.error
+        ? this.setState({ foundBooks: [], invalidQuery: true })
+        : this.setState({ foundBooks: books, invalidQuery: false });
     });
   };
+
   render() {
-    const { query, foundBooks } = this.state;
+    const { query, foundBooks, invalidQuery } = this.state;
     const { shelves, onUpdateBook } = this.props;
     return (
       <div className="SearchPage">
         <SearchInput query={query} onInputChange={this.updateQuery} />
-        <SearchDisplay books={foundBooks} shelves={shelves} onUpdateBook={onUpdateBook} />
+        {foundBooks && foundBooks.length > 0 && (
+          <SearchDisplay books={foundBooks} shelves={shelves} onUpdateBook={onUpdateBook} />
+        )}
+        <p>{invalidQuery ? "Invalid query" : null}</p>
       </div>
     );
   }

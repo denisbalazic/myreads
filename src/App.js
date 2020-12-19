@@ -6,6 +6,9 @@ import SearchPage from "./SearchPage";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 
+/**
+ * Shelves are here so I can easily add some more
+ */
 const shelves = [
   {
     name: "currentlyReading",
@@ -23,13 +26,12 @@ const shelves = [
 
 class BooksApp extends Component {
   state = {
-    books: [{}],
+    books: [],
   };
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState({ books: books });
-    });
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+    this.setState({ books: books });
   }
 
   updateBook = (book) => {
@@ -37,6 +39,9 @@ class BooksApp extends Component {
       const index = prevState.books.findIndex((b) => b.id === book.id);
       if (index === -1) {
         return { books: prevState.books.concat([book]) };
+      }
+      if (book.shelf === "none") {
+        return { books: prevState.books.filter((b) => b.shelf !== "none") };
       }
       prevState.books[index] = book;
       return { books: prevState.books };
@@ -51,11 +56,19 @@ class BooksApp extends Component {
         <Route
           exact
           path="/"
-          render={() => <ShelvesPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />}
+          render={() => (
+            <ShelvesPage
+              books={this.state.books}
+              shelves={shelves}
+              onUpdateBook={this.updateBook}
+            />
+          )}
         />
         <Route
           path="/search"
-          render={() => <SearchPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />}
+          render={() => (
+            <SearchPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />
+          )}
         />
       </div>
     );

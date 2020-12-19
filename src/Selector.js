@@ -9,22 +9,19 @@ class Selector extends Component {
 
   render() {
     const { book, shelves } = this.props;
-    console.log(shelves);
     return (
       //TODO: Refactor selected options in DRY manner (loop through shelves?)
       <div className="book-shelf-changer">
-        <select onChange={(e) => this.updateShelf(e)}>
+        <select value={book.shelf || "none"} onChange={(e) => this.updateShelf(e)}>
           <option value="move" disabled>
             Move to...
           </option>
           {shelves.map((shelf) => (
-            <option value={shelf.name} selected={book.shelf === shelf.name ? true : null}>
+            <option key={shelf.name} value={shelf.name}>
               {shelf.displayName}
             </option>
           ))}
-          <option value="none" selected={!this.props.book.shelf ? true : null}>
-            None
-          </option>
+          <option value="none">None</option>
         </select>
       </div>
     );

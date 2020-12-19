@@ -7,13 +7,13 @@ class SearchDisplay extends Component {
     return (
       <div className="search-books-results">
         <ol className="books-grid">
-          <li>
-            {books.map((book) => (
+          {books &&
+            books.length > 0 &&
+            books.map((book) => (
               <li>
                 <Book key={book.id} book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
               </li>
             ))}
-          </li>
         </ol>
       </div>
     );
