@@ -10,7 +10,9 @@ class Book extends Component {
     return (
       <div className="book">
         <div className="book-top">
-          <Link to={"/books/" + book.id}>
+          <Link
+            to={{ pathname: "/books/" + book.id, state: { pathname: window.location.pathname } }}
+          >
             <div
               className="book-cover"
               style={{

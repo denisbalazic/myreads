@@ -82,8 +82,15 @@ class BooksApp extends Component {
           />
           <Route
             path="/books/:bookId"
-            render={({ match }) => {
-              return <BookPage match={match} shelves={shelves} onUpdateBook={this.updateBook} />;
+            render={({ match, location }) => {
+              return (
+                <BookPage
+                  location={location}
+                  match={match}
+                  shelves={shelves}
+                  onUpdateBook={this.updateBook}
+                />
+              );
             }}
           />
         </div>

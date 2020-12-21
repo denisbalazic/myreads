@@ -15,6 +15,7 @@ class BookPage extends Component {
   }
 
   render() {
+    console.log(this.props.location.state.pathname);
     const { shelves, onUpdateBook } = this.props;
     const { book } = this.state;
     if (!this.state.isLoaded) {
@@ -33,7 +34,7 @@ class BookPage extends Component {
               </p>
               <p>Pages: {book.pageCount}</p>
             </div>
-            <Link to="/">
+            <Link to={this.props.location.state.pathname}>
               <button className="close-search">Close</button>
             </Link>
           </div>
