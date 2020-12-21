@@ -12,7 +12,7 @@ class SearchDisplay extends Component {
             foundBooks.length > 0 &&
             foundBooks.map((foundBook) => {
               const index = books.findIndex((b) => b.id === foundBook.id);
-              index !== -1 ? (foundBook.shelf = books[index].shelf) : (foundBook.shelf = "none");
+              foundBook.shelf = index !== -1 ? books[index].shelf : "none";
               return (
                 <li key={foundBook.id}>
                   <Book book={foundBook} shelves={shelves} onUpdateBook={onUpdateBook} />
