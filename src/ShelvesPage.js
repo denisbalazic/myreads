@@ -2,28 +2,19 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Shelf from "./Shelf";
+import NewShelfForm from "./NewShelfForm";
 
 class ShelvesPage extends Component {
   state = {
-    shelfName: "",
     showNewShelfForm: false,
   };
 
-  showForm = () => {
-    this.setState({ showNewShelfForm: true });
-  };
-
-  handleInputChange = (e) => {
-    this.setState({ shelfName: e.target.value });
-  };
-
-  addNewShelf = (e) => {
-    e.preventDefault();
-    this.props.onAddNewShelf(this.state.shelfName);
+  toggleForm = () => {
+    this.setState((prevState) => ({ showNewShelfForm: !prevState.showNewShelfForm }));
   };
 
   render() {
-    const { books, shelves, onUpdateBook } = this.props;
+    const { books, shelves, onUpdateBook, onRemoveShelf, onAddNewShelf } = this.props;
 
     return (
       <div className="list-books">
@@ -35,29 +26,23 @@ class ShelvesPage extends Component {
             <Shelf
               key={shelf.name}
               books={books.filter((book) => book.shelf === shelf.name)}
-              title={shelf.displayName}
+              shelf={shelf}
               shelves={shelves}
               onUpdateBook={onUpdateBook}
+              onRemoveShelf={onRemoveShelf}
             />
           ))}
         </div>
-        <div>
-          {!this.state.showNewShelfForm ? (
-            <button onClick={this.showForm} className="btn-large">
-              Add New Shelf
-            </button>
-          ) : (
-            <form action="">
-              <input
-                onChange={this.handleInputChange}
-                value={this.state.shelfName}
-                type="text"
-                placeholder="Shelf Name"
-              />
-              <button onClick={this.addNewShelf}>Add</button>
-            </form>
+        {/************ Add new shelf ****************/}
+        <div className="new-shelf-form">
+          <button onClick={this.toggleForm} className="btn-large">
+            {!this.state.showNewShelfForm ? "Add New Shelf" : "Hide"}
+          </button>
+          {!this.state.showNewShelfForm ? null : (
+            <NewShelfForm onAddNewShelf={onAddNewShelf} hideForm={this.toggleForm} />
           )}
         </div>
+        {/* **************************************** */}
         <div className="open-search">
           <Link to="/search">
             <button>Add a book</button>

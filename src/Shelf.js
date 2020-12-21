@@ -4,13 +4,15 @@ import Book from "./Book";
 
 class Shelf extends Component {
   render() {
-    const { books, title, shelves, onUpdateBook } = this.props;
+    const { books, shelf, shelves, onUpdateBook, onRemoveShelf } = this.props;
 
     return (
       <div className="bookshelf">
         <div className="bookshelf-title">
-          <h2>{title}</h2>
-          <button className="btn-small">remove shelf</button>
+          <h2>{shelf.displayName}</h2>
+          <button onClick={() => onRemoveShelf(shelf.name)} className="btn-small">
+            remove shelf
+          </button>
         </div>
         <div className="bookshelf-books">
           <ol className="books-grid">
@@ -30,7 +32,7 @@ class Shelf extends Component {
 
 Shelf.propTypes = {
   books: PropTypes.array.isRequired,
-  title: PropTypes.string.isRequired,
+  shelf: PropTypes.object.isRequired,
   shelves: PropTypes.array.isRequired,
   onUpdateBook: PropTypes.func.isRequired,
 };

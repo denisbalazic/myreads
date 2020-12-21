@@ -23,10 +23,6 @@ class BooksApp extends Component {
         name: "read",
         displayName: "Read",
       },
-      {
-        name: "dfg",
-        displayName: "DFFFG",
-      },
     ],
     isLoaded: false,
     error: null,
@@ -61,6 +57,13 @@ class BooksApp extends Component {
     }));
   };
 
+  removeShelf = (shelfName) => {
+    console.log(shelfName);
+    this.setState((prevState) => ({
+      shelves: prevState.shelves.filter((s) => s.name !== shelfName),
+    }));
+  };
+
   render() {
     if (!this.state.isLoaded) {
       return <div>Loading...</div>;
@@ -73,8 +76,10 @@ class BooksApp extends Component {
             render={() => (
               <ShelvesPage
                 books={this.state.books}
-                shelves={shelves}
+                shelves={this.state.shelves}
                 onUpdateBook={this.updateBook}
+                onAddNewShelf={this.addShelf}
+                onRemoveShelf={this.removeShelf}
               />
             )}
           />
@@ -83,7 +88,7 @@ class BooksApp extends Component {
             render={() => (
               <SearchPage
                 books={this.state.books}
-                shelves={shelves}
+                shelves={this.state.shelves}
                 onUpdateBook={this.updateBook}
               />
             )}
@@ -91,7 +96,13 @@ class BooksApp extends Component {
           <Route
             path="/books/:bookId"
             render={({ match }) => {
-              return <BookPage match={match} shelves={shelves} onUpdateBook={this.updateBook} />;
+              return (
+                <BookPage
+                  match={match}
+                  shelves={this.state.shelves}
+                  onUpdateBook={this.updateBook}
+                />
+              );
             }}
           />
         </div>

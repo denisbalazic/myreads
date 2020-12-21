@@ -48,32 +48,10 @@ body,
   align-items: flex-end;
   padding: 10px 0 5px 0;
   border-bottom: 1px solid #dedede;
-  line-height: 0;
 }
 
-button.btn-small {
-  height: 1.8em;
-  background-color: #2e7c31;
-  color: white;
-  outline: none;
-  border-radius: 6px;
-}
-
-button.btn-small:hover {
-  background-color: rgb(0, 102, 0);
-}
-
-button.btn-large {
-  height: 2.3em;
-  margin: 30px;
-  background-color: #2e7c31;
-  color: white;
-  outline: none;
-  border-radius: 12px;
-}
-
-button.btn-large:hover {
-  background-color: rgb(0, 102, 0);
+.bookshelf-title h2 {
+  margin: 0;
 }
 
 .bookshelf-books {
@@ -253,4 +231,46 @@ button:active {
 .book-header h4,
 .book-header p {
   margin: 0;
+}
+
+/* Add new shelf */
+
+.new-shelf-form {
+  display: flex;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 0 6px rgba(0, 0, 0, 0.23);
+}
+
+.new-shelf-form input {
+  width: 100%;
+  padding: 15px 10px;
+  font-size: 1.25em;
+  border: none;
+  outline: none;
+}
+
+button.btn-small {
+  height: 1.8em;
+  background-color: #2e7c31;
+  color: white;
+  outline: none;
+  border-radius: 6px;
+}
+
+button.btn-small:hover {
+  background-color: rgb(0, 102, 0);
+}
+
+button.btn-large {
+  display: block;
+  top: 20px;
+  left: 15px;
+  width: 120px;
+  height: 53px;
+  border: none;
+  outline: none;
+}
+
+button.btn-large:hover {
+  background-color: rgb(0, 102, 0);
+  color: white;
 }
