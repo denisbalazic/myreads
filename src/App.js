@@ -95,11 +95,20 @@ class BooksApp extends Component {
           />
           <Route
             path="/books/:bookId"
+<<<<<<< HEAD
             render={({ match }) => {
               return (
                 <BookPage
                   match={match}
                   shelves={this.state.shelves}
+=======
+            render={({ match, location }) => {
+              return (
+                <BookPage
+                  location={location}
+                  match={match}
+                  shelves={shelves}
+>>>>>>> master
                   onUpdateBook={this.updateBook}
                 />
               );
