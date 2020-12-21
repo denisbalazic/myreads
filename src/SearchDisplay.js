@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Book from "./Book";
 
 class SearchDisplay extends Component {
@@ -23,5 +24,12 @@ class SearchDisplay extends Component {
     );
   }
 }
+
+SearchDisplay.propTypes = {
+  books: PropTypes.array,
+  foundBooks: PropTypes.array.isRequired,
+  shelves: PropTypes.array.isRequired,
+  onUpdateBook: PropTypes.func.isRequired,
+};
 
 export default SearchDisplay;

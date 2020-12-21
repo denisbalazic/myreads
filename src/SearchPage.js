@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import SearchInput from "./SearchInput";
 import SearchDisplay from "./SearchDisplay";
 import * as BooksAPI from "./BooksAPI";
@@ -43,5 +44,11 @@ class SearchPage extends Component {
     );
   }
 }
+
+SearchPage.propTypes = {
+  books: PropTypes.array.isRequired,
+  shelves: PropTypes.array.isRequired,
+  onUpdateBook: PropTypes.func.isRequired,
+};
 
 export default SearchPage;

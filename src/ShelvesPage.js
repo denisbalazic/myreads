@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import Shelf from "./Shelf";
 
 class ShelvesPage extends Component {
@@ -66,5 +67,11 @@ class ShelvesPage extends Component {
     );
   }
 }
+
+ShelvesPage.propTypes = {
+  books: PropTypes.array.isRequired,
+  shelves: PropTypes.array.isRequired,
+  onUpdateBook: PropTypes.func.isRequired,
+};
 
 export default ShelvesPage;

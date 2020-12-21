@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 class SearchInput extends Component {
@@ -18,11 +19,21 @@ class SearchInput extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-          <input value={query} onChange={(e) => onInputChange(e)} type="text" placeholder="Search by title or author" />
+          <input
+            value={query}
+            onChange={(e) => onInputChange(e)}
+            type="text"
+            placeholder="Search by title or author"
+          />
         </div>
       </div>
     );
   }
 }
+
+SearchInput.propTypes = {
+  query: PropTypes.string.isRequired,
+  onInputChange: PropTypes.func.isRequired,
+};
 
 export default SearchInput;
