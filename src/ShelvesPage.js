@@ -22,7 +22,7 @@ class ShelvesPage extends Component {
           <h1>MyReads</h1>
         </div>
         <div className="list-books-content">
-          {shelves.map((shelf, index) => (
+          {shelves.map((shelf) => (
             <Shelf
               key={shelf.name}
               books={books.filter((book) => book.shelf === shelf.name)}
