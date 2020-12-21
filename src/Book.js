@@ -30,7 +30,7 @@ class Book extends Component {
           <Selector book={book} shelves={shelves} onUpdateBook={onUpdateBook} />
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{authors}</div>
+        <div className="book-authors">{authors && authors.join(", ")}</div>
       </div>
     );
   }

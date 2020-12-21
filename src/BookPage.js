@@ -28,7 +28,7 @@ class BookPage extends Component {
             <div className="book-card">
               <h1>{book.title}</h1>
               <h4>{book.subtitle}</h4>
-              <h3>{book.authors}</h3>
+              <h3>{book.authors && book.authors.join(", ")}</h3>
               <p>
                 {book.publisher}, {book.publishedDate}
               </p>
