@@ -8,6 +8,8 @@ The main page shows 3 shelves for books populated with books fetched from Udacit
 Search results on the search page allow the user to select and place the book in a certain shelf.
 All data is persisted on udacity's server with some restrictions explained below.
 
+Basic design and layout is provided by Udacity.
+
 ## TL;DR
 
 To get started developing right away:
@@ -46,8 +48,6 @@ To get started developing right away:
     ├── Shelf.js
     └── ShelvesPage.js # Main page, showing users books organized in shelves
 ```
-
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
 
 ## Backend Server
 
@@ -102,6 +102,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Contributing
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Feel free to add some features or propose changes.
