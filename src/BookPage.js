@@ -48,6 +48,7 @@ class BookPage extends Component {
 }
 
 BookPage.propTypes = {
+  location: PropTypes.object.isRequired,
   shelves: PropTypes.array.isRequired,
   onUpdateBook: PropTypes.func.isRequired,
 };
