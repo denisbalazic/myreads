@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 // import * as BooksAPI from './BooksAPI'
 import ShelvesPage from "./ShelvesPage";
 import SearchPage from "./SearchPage";
+import BookPage from "./BookPage";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 
@@ -27,11 +28,13 @@ const shelves = [
 class BooksApp extends Component {
   state = {
     books: [],
+    isLoaded: false,
+    error: null,
   };
 
   async componentDidMount() {
     const books = await BooksAPI.getAll();
-    this.setState({ books: books });
+    this.setState({ isLoaded: true, books: books });
   }
 
   updateBook = (book) => {
@@ -51,27 +54,41 @@ class BooksApp extends Component {
   };
 
   render() {
-    return (
-      <div>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <ShelvesPage
-              books={this.state.books}
-              shelves={shelves}
-              onUpdateBook={this.updateBook}
-            />
-          )}
-        />
-        <Route
-          path="/search"
-          render={() => (
-            <SearchPage books={this.state.books} shelves={shelves} onUpdateBook={this.updateBook} />
-          )}
-        />
-      </div>
-    );
+    if (!this.state.isLoaded) {
+      return <div>Loading...</div>;
+    } else {
+      return (
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <ShelvesPage
+                books={this.state.books}
+                shelves={shelves}
+                onUpdateBook={this.updateBook}
+              />
+            )}
+          />
+          <Route
+            path="/search"
+            render={() => (
+              <SearchPage
+                books={this.state.books}
+                shelves={shelves}
+                onUpdateBook={this.updateBook}
+              />
+            )}
+          />
+          <Route
+            path="/books/:bookId"
+            render={({ match }) => {
+              return <BookPage match={match} shelves={shelves} onUpdateBook={this.updateBook} />;
+            }}
+          />
+        </div>
+      );
+    }
   }
 }
 

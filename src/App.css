@@ -198,3 +198,29 @@ button:active {
   text-align: center;
   font-size: 0.8em;
 }
+
+/* Book page */
+
+.book-page {
+  padding: 15px;
+}
+
+.book-header {
+  display: flex;
+}
+
+.book-header img {
+  width: 128px;
+  height: 193px;
+}
+.book-card {
+  padding: 10px;
+  margin-right: auto;
+}
+
+.book-header h1,
+.book-header h3,
+.book-header h4,
+.book-header p {
+  margin: 0;
+}
