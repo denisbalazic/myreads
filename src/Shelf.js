@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Book from "./Book";
 
-function Shelf(props) {
+export default function Shelf(props) {
   const { books, title, shelves, onUpdateBook } = props;
 
   return (
@@ -28,5 +28,3 @@ Shelf.propTypes = {
   shelves: PropTypes.array.isRequired,
   onUpdateBook: PropTypes.func.isRequired,
 };
-
-export default Shelf;

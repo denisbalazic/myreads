@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { Route } from "react-router-dom";
 import ShelvesPage from "./ShelvesPage";
 import SearchPage from "./SearchPage";
@@ -24,78 +24,59 @@ const shelves = [
   },
 ];
 
-class BooksApp extends Component {
-  state = {
-    books: [],
-    isLoaded: false,
-    error: null,
-  };
+export default function App() {
+  const [books, setBooks] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  async componentDidMount() {
+  useEffect(async () => {
     const books = await BooksAPI.getAll();
-    this.setState({ isLoaded: true, books: books });
-  }
+    setBooks(books);
+    setIsLoaded(true);
+  });
 
-  updateBook = (book) => {
-    this.setState((prevState) => {
-      const index = prevState.books.findIndex((b) => b.id === book.id);
+  const updateBook = (book) => {
+    setBooks((prevState) => {
+      const index = prevState.findIndex((b) => b.id === book.id);
       if (index === -1) {
-        return { books: prevState.books.concat([book]) };
+        return prevState.concat([book]);
       }
       if (book.shelf === "none") {
-        return { books: prevState.books.filter((b) => b.shelf !== "none") };
+        return prevState.filter((b) => b.shelf !== "none");
       }
-      prevState.books[index] = book;
-      return { books: prevState.books };
+      prevState[index] = book;
+      return prevState;
     });
-    //TODO: Check if response is positive
     BooksAPI.update(book, book.shelf);
   };
 
-  render() {
-    if (!this.state.isLoaded) {
-      return <div>Loading...</div>;
-    } else {
-      return (
-        <div>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <ShelvesPage
-                books={this.state.books}
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <div>
+        <Route
+          exact
+          path="/"
+          render={() => <ShelvesPage books={books} shelves={shelves} onUpdateBook={updateBook} />}
+        />
+        <Route
+          path="/search"
+          render={() => <SearchPage books={books} shelves={shelves} onUpdateBook={updateBook} />}
+        />
+        <Route
+          path="/books/:bookId"
+          render={({ match, location }) => {
+            return (
+              <BookPage
+                location={location}
+                match={match}
                 shelves={shelves}
-                onUpdateBook={this.updateBook}
+                onUpdateBook={updateBook}
               />
-            )}
-          />
-          <Route
-            path="/search"
-            render={() => (
-              <SearchPage
-                books={this.state.books}
-                shelves={shelves}
-                onUpdateBook={this.updateBook}
-              />
-            )}
-          />
-          <Route
-            path="/books/:bookId"
-            render={({ match, location }) => {
-              return (
-                <BookPage
-                  location={location}
-                  match={match}
-                  shelves={shelves}
-                  onUpdateBook={this.updateBook}
-                />
-              );
-            }}
-          />
-        </div>
-      );
-    }
+            );
+          }}
+        />
+      </div>
+    );
   }
 }
-
-export default BooksApp;

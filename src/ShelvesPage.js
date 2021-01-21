@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Shelf from "./Shelf";
 
-function ShelvesPage(props) {
+export default function ShelvesPage(props) {
   const { books, shelves, onUpdateBook } = props;
 
   return (
@@ -36,5 +36,3 @@ ShelvesPage.propTypes = {
   shelves: PropTypes.array.isRequired,
   onUpdateBook: PropTypes.func.isRequired,
 };
-
-export default ShelvesPage;
