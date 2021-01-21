@@ -28,10 +28,13 @@ export default function App() {
   const [books, setBooks] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(async () => {
-    const books = await BooksAPI.getAll();
-    setBooks(books);
-    setIsLoaded(true);
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const books = await BooksAPI.getAll();
+      setBooks(books);
+      setIsLoaded(true);
+    };
+    fetchBooks();
   });
 
   const updateBook = (book) => {
