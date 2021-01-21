@@ -10,6 +10,8 @@ All data is persisted on udacity's server with some restrictions explained below
 
 Basic design and layout is provided by Udacity.
 
+EDIT: After passing this course I have refactored app to use React hooks instead of class components. Old app is in branch class-components.
+
 ## TL;DR
 
 To get started developing right away:
